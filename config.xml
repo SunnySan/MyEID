@@ -23,7 +23,7 @@
     <plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.1" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
     <plugin name="cordova-plugin-hce">
-        <variable name="AID_FILTER" value="F222222222" />
+        <variable name="AID_FILTER" value="A0000000041010" />
     </plugin>
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
