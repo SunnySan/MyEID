@@ -43,7 +43,7 @@
 				</div>
 
 			<!-- Gigantic Heading -->
-				<section class="wrapper style2">
+				<section id="secSelectCardMessage" class="wrapper style2">
 					<div class="container">
 						<header class="major">
 							<h2>Please click the card picture you want to pay with.</h2>
@@ -171,6 +171,7 @@
 						if (result.withFingerprint) {
 							//console.log("Successfully encrypted credentials.");
 							//console.log("Encrypted credentials: " + result.token);
+							$('#secSelectCardMessage').hide();
 							$('#secSelectCard').hide();
 							$('#secTapNFCReader').show();
 						} else if (result.withBackup) {
@@ -204,6 +205,7 @@
 	}	//function doVerifyFingerprint(var creditCardID){	//使用指紋或PIN碼驗證
 	
 	function doVerifyPINCode(creditCardID){
+		$('#secSelectCardMessage').hide();
 		$('#secSelectCard').hide();
 		$('#secInputPINCode').show();
 	}
