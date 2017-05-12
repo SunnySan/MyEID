@@ -59,7 +59,7 @@ var app = {
             */
             alert('OK CMD SW');
             console.log('OK CMD SW');
-            console.log('apdu=' + app.okCommand);
+            console.log('apdu=' + hce.util.byteArrayToHexString(app.okCommand));
             hce.sendResponse(app.okCommand);
         } else {
             alert('UNKNOWN CMD SW');
