@@ -59,11 +59,11 @@ var app = {
             */
             alert('OK CMD SW');
             console.log('OK CMD SW');
-            hce.sendResponse(hce.util.stringToBytes(app.okCommand));
+            hce.sendResponse(app.okCommand);
         } else {
             alert('UNKNOWN CMD SW');
             console.log('UNKNOWN CMD SW');
-            hce.sendResponse(hce.util.stringToBytes(app.unknownCommand));
+            hce.sendResponse(app.unknownCommand);
         }
 
     },
