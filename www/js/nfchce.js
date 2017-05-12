@@ -46,12 +46,18 @@ var app = {
         console.log('expecting        ' + SELECT_APDU);
 
         if (SELECT_APDU === commandAsString) {
+        	/*
             var accountNumberAsBytes = hce.util.stringToBytes(accountNumber.value);
             var data = hce.util.concatenateBuffers(accountNumberAsBytes, app.okCommand);
 
             console.log('Sending ' + hce.util.byteArrayToHexString(data));
             hce.sendResponse(data);
+            */
+            alert('OK CMD SW');
+            console.log('OK CMD SW');
+            hce.sendResponse(app.okCommand);
         } else {
+            alert('UNKNOWN CMD SW');
             console.log('UNKNOWN CMD SW');
             hce.sendResponse(app.unknownCommand);
         }
