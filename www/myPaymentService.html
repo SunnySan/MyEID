@@ -77,7 +77,7 @@
 				</section>
 
 			<!-- Posts -->
-				<section id="secInputPINCode" class="wrapper style1">
+				<section id="secInputPINCode" class="wrapper style1" style="display:none;">
 					<div class="container">
 						<h3>Please enter PIN Code</h3>
 						<form>
@@ -98,7 +98,7 @@
 				</section>
 
 			<!-- Posts -->
-				<section id="secTapNFCReader" class="wrapper style1">
+				<section id="secTapNFCReader" class="wrapper style1" style="display:none;">
 					<div class="container">
 						<div class="row">
 							<section class="12u">
@@ -144,6 +144,7 @@
 	});
 	
 	function doAuthentication(creditCardID){	//使用指紋或PIN碼驗證
+		var bOK = false;
 		FingerprintAuth.isAvailable(isAvailableSuccess, isAvailableError);
 		
 		/**
@@ -154,22 +155,24 @@
 		*   }
 		*/
 		function isAvailableSuccess(result) {
-			alert("FingerprintAuth available: " + JSON.stringify(result));
+			//alert("FingerprintAuth available: " + JSON.stringify(result));
 			if (result.isAvailable) {
-				alert("result.isAvailable");
+				//alert("result.isAvailable");
 				var encryptConfig = {
 					clientId: "MyEID",
 					username: "886986123101",
-					password: "0000"
+					password: "0000",
+					disableBackup: true
 					}; // See config object for required parameters 
 
 					FingerprintAuth.encrypt(encryptConfig, successCallback, errorCallback);
 					
 					function successCallback(result) {
-						alert("successCallback(): " + JSON.stringify(result));
+						//alert("successCallback(): " + JSON.stringify(result));
 						if (result.withFingerprint) {
-							console.log("Successfully encrypted credentials.");
-							console.log("Encrypted credentials: " + result.token);  
+							bOK = true;
+							//console.log("Successfully encrypted credentials.");
+							//console.log("Encrypted credentials: " + result.token);
 						} else if (result.withBackup) {
 							console.log("Authenticated with backup password");
 						}
@@ -177,7 +180,7 @@
 					
 					function errorCallback(error) {
 						if (error === FingerprintAuth.ERRORS.FINGERPRINT_CANCELLED) {
-							alert("FingerprintAuth Dialog Cancelled!");
+							//alert("FingerprintAuth Dialog Cancelled!");
 						} else {
 							alert("FingerprintAuth Error: " + error);
 						}
@@ -185,7 +188,14 @@
 			}else if (!result.isHardwareDetected){
 				//沒有掃描指紋的硬體，直接讓用戶輸入PIN
 			}else{	//有硬體，但尚未設定指紋
-				alert("Please enroll your fingerprint first!");
+				//alert("Please enroll your fingerprint first!");
+			}
+			
+			if (!bOK){
+				$('#secInputPINCode').show();
+				$('html, body').animate({
+					scrollTop: $("#secInputPINCode").offset().top
+				}, 1000);
 			}
 		}	//function isAvailableSuccess(result) {
  
