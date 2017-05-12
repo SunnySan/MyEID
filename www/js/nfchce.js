@@ -37,6 +37,7 @@ var app = {
     // if the select apdu command is received, the loyalty card data is returned to the reader
     // otherwise unknown command is returned
     onCommand: function(command) {
+    	alert(command);
         console.log(command);
         var commandAsBytes = new Uint8Array(command);
         var commandAsString = hce.util.byteArrayToHexString(commandAsBytes);
