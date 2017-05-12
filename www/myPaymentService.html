@@ -157,8 +157,35 @@
 			alert("FingerprintAuth available: " + JSON.stringify(result));
 			if (result.isAvailable) {
 				alert("result.isAvailable");
-				var encryptConfig = {}; // See config object for required parameters 
-				//FingerprintAuth.encrypt(encryptConfig, encryptSuccessCallback, encryptErrorCallback);
+				var encryptConfig = {
+					clientId: "MyEID",
+					username: "886986123101",
+					password: "0000"
+					}; // See config object for required parameters 
+
+					FingerprintAuth.encrypt(encryptConfig, successCallback, errorCallback);
+					
+					function successCallback(result) {
+						alert("successCallback(): " + JSON.stringify(result));
+						if (result.withFingerprint) {
+							console.log("Successfully encrypted credentials.");
+							console.log("Encrypted credentials: " + result.token);  
+						} else if (result.withBackup) {
+							console.log("Authenticated with backup password");
+						}
+					}
+					
+					function errorCallback(error) {
+						if (error === FingerprintAuth.ERRORS.FINGERPRINT_CANCELLED) {
+							alert("FingerprintAuth Dialog Cancelled!");
+						} else {
+							alert("FingerprintAuth Error: " + error);
+						}
+					}
+			}else if (!result.isHardwareDetected){
+				//沒有掃描指紋的硬體，直接讓用戶輸入PIN
+			}else{	//有硬體，但尚未設定指紋
+				alert("Please enroll your fingerprint first!");
 			}
 		}	//function isAvailableSuccess(result) {
  
