@@ -26,6 +26,7 @@ var app = {
         alert('bindEvents');
     },
     onDeviceReady: function() {
+    	alert('ready 00');
         // register to receive APDU commands
 	    hce.registerCommandCallback(app.onCommand);
 
