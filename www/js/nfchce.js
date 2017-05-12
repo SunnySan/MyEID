@@ -41,12 +41,11 @@ var app = {
     // if the select apdu command is received, the loyalty card data is returned to the reader
     // otherwise unknown command is returned
     onCommand: function(command) {
-    	alert(command);
         console.log(command);
         var commandAsBytes = new Uint8Array(command);
         var commandAsString = hce.util.byteArrayToHexString(commandAsBytes);
 
-        //alert(commandAsString);
+        alert(commandAsString);
         console.log('received command ' + commandAsString);
         console.log('expecting        ' + SELECT_APDU);
 
@@ -60,11 +59,11 @@ var app = {
             */
             alert('OK CMD SW');
             console.log('OK CMD SW');
-            hce.sendResponse(hce.util.stringToBytes(app.okCommand));
+            hce.sendResponse(hce.util.stringToBytes(app.okCommand), app.onDeactivated);
         } else {
             alert('UNKNOWN CMD SW');
             console.log('UNKNOWN CMD SW');
-            hce.sendResponse(hce.util.stringToBytes(app.unknownCommand));
+            hce.sendResponse(hce.util.stringToBytes(app.unknownCommand), app.onDeactivated);
         }
 
     },
