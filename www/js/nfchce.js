@@ -19,9 +19,11 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        alert('initialize');
     },
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        alert('bindEvents');
     },
     onDeviceReady: function() {
         // register to receive APDU commands
@@ -32,6 +34,7 @@ var app = {
 
         app.okCommand = hce.util.hexStringToByteArray(SELECT_OK_SW);
         app.unknownCommand = hce.util.hexStringToByteArray(UNKNOWN_CMD_SW);
+        alert('onDeviceReady');
     },
     // onCommand is called when an APDU command is received from the HCE reader
     // if the select apdu command is received, the loyalty card data is returned to the reader
