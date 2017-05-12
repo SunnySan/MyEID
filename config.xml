@@ -22,6 +22,7 @@
     <plugin name="cordova-plugin-console" source="npm" spec="~1.0.3" />
     <plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.1" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
+    <plugin name="cordova-plugin-android-fingerprint-auth" />
     <plugin name="cordova-plugin-hce">
         <variable name="AID_FILTER" value="F222222222" />
     </plugin>
