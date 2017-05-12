@@ -59,6 +59,7 @@ var app = {
             */
             alert('OK CMD SW');
             console.log('OK CMD SW');
+            console.log(app.okCommand);
             hce.sendResponse(app.okCommand);
         } else {
             alert('UNKNOWN CMD SW');
