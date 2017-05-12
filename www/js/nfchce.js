@@ -19,14 +19,14 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
-        alert('initialize');
+        //alert('initialize');
     },
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
-        alert('bindEvents');
+        //alert('bindEvents');
     },
     onDeviceReady: function() {
-    	alert('ready 00');
+    	//alert('ready 00');
         // register to receive APDU commands
 	    hce.registerCommandCallback(app.onCommand);
 
