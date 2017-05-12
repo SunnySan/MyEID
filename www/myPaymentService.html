@@ -61,7 +61,7 @@
 										<h3>My VISA Card</h3>
 									</div>
 									<!--<a href="#" class="image left" style="width:100%"><img src="images/creditcard01.png" alt="" /></a>-->
-									<img style="width:100%;" src="images/creditcard01.png" alt="" onclick="doAuthentication('creditcard01');" />
+									<img style="width:100%;" src="images/creditcard01.png" alt="" onclick="doVerifyFingerprint('creditcard01');" />
 								</div>
 							</section>
 							<section class="12u">
@@ -69,7 +69,7 @@
 									<div class="row">
 										<h3>My Master Card</h3>
 									</div>
-									<img style="width:100%" src="images/creditcard02.png" alt="" onclick="doAuthentication('creditcard02');" />
+									<img style="width:100%" src="images/creditcard02.png" alt="" onclick="doVerifyFingerprint('creditcard02');" />
 								</div>
 							</section>
 						</div>
@@ -143,8 +143,7 @@
 		}
 	});
 	
-	function doAuthentication(creditCardID){	//使用指紋或PIN碼驗證
-		var bOK = false;
+	function doVerifyFingerprint(creditCardID){	//使用指紋或PIN碼驗證
 		FingerprintAuth.isAvailable(isAvailableSuccess, isAvailableError);
 		
 		/**
@@ -170,11 +169,13 @@
 					function successCallback(result) {
 						//alert("successCallback(): " + JSON.stringify(result));
 						if (result.withFingerprint) {
-							bOK = true;
 							//console.log("Successfully encrypted credentials.");
 							//console.log("Encrypted credentials: " + result.token);
+							$('#secSelectCard').hide();
+							$('#secTapNFCReader').show();
 						} else if (result.withBackup) {
 							console.log("Authenticated with backup password");
+							doVerifyPINCode(creditCardID);
 						}
 					}
 					
@@ -184,25 +185,28 @@
 						} else {
 							alert("FingerprintAuth Error: " + error);
 						}
+						doVerifyPINCode(creditCardID);
 					}
 			}else if (!result.isHardwareDetected){
 				//沒有掃描指紋的硬體，直接讓用戶輸入PIN
+				doVerifyPINCode(creditCardID);
 			}else{	//有硬體，但尚未設定指紋
 				//alert("Please enroll your fingerprint first!");
-			}
-			
-			if (!bOK){
-				$('#secInputPINCode').show();
-				$('html, body').animate({
-					scrollTop: $("#secInputPINCode").offset().top
-				}, 1000);
+				doVerifyPINCode(creditCardID);
 			}
 		}	//function isAvailableSuccess(result) {
  
+ 
 		function isAvailableError(message) {
 			alert("isAvailableError(): " + message);
+			doVerifyPINCode(creditCardID);
 		}	//function isAvailableError(message) {
-	}	//function doAuthentication(var creditCardID){	//使用指紋或PIN碼驗證
+	}	//function doVerifyFingerprint(var creditCardID){	//使用指紋或PIN碼驗證
+	
+	function doVerifyPINCode(creditCardID){
+		$('#secSelectCard').hide();
+		$('#secInputPINCode').show();
+	}
 	
 	function doNFCPayment(){
 		alert("try to do payment");
