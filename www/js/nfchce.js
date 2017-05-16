@@ -65,7 +65,7 @@ var app = {
             //console.log('apdu=' + hce.util.byteArrayToHexString(app.okCommand));
             //hce.sendResponse(app.okCommand);
         } else if (TRANSACTION_APDU == commandAsString){
-        	hce.sendResponse(app.okCommand);
+        	hce.sendResponse(hce.util.concatenateBuffers(app.okCommand, null));
         	console.log('Transaction CMD SW');
         	$('#secTapNFCReader').hide();
         	$('#secPaymentSuccess').show();
