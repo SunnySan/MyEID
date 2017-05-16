@@ -65,8 +65,10 @@ var app = {
             //console.log('apdu=' + hce.util.byteArrayToHexString(app.okCommand));
             //hce.sendResponse(app.okCommand);
         } else if (TRANSACTION_APDU == commandAsString){
-        	hce.sendResponse(hce.util.stringToBytes(SELECT_OK_SW));
+        	hce.sendResponse(app.okCommand);
         	console.log('Transaction CMD SW');
+        	$('#secTapNFCReader').hide();
+        	$('#secPaymentSuccess').show();
         } else {
             //alert('UNKNOWN CMD SW');
             console.log('UNKNOWN CMD SW');
