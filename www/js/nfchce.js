@@ -51,11 +51,11 @@ var app = {
         console.log('received command ' + commandAsString);
         console.log('expecting        ' + SELECT_APDU);
 
+        //var accountNumberAsBytes = hce.util.stringToBytes(accountNumber.value);
+        var accountNumberAsBytes = hce.util.stringToBytes(MYACCOUNT);
+        var data = hce.util.concatenateBuffers(accountNumberAsBytes, app.okCommand);
+
         if (SELECT_APDU === commandAsString) {
-        	
-            //var accountNumberAsBytes = hce.util.stringToBytes(accountNumber.value);
-            var accountNumberAsBytes = hce.util.stringToBytes(MYACCOUNT);
-            var data = hce.util.concatenateBuffers(accountNumberAsBytes, app.okCommand);
 
             console.log('Sending ' + hce.util.byteArrayToHexString(data));
             hce.sendResponse(data);
@@ -65,7 +65,7 @@ var app = {
             //console.log('apdu=' + hce.util.byteArrayToHexString(app.okCommand));
             //hce.sendResponse(app.okCommand);
         } else if (TRANSACTION_APDU == commandAsString){
-        	hce.sendResponse(hce.util.concatenateBuffers(app.okCommand, accountNumberAsBytes));
+            hce.sendResponse(data);
         	console.log('Transaction CMD SW');
         	$('#secTapNFCReader').hide();
         	$('#secPaymentSuccess').show();
