@@ -1,8 +1,10 @@
 var SAMPLE_LOYALTY_CARD_AID = 'F222222222';
 var SELECT_APDU_HEADER = '00A40400';
+var TRANSACTION_APDU = 'aa000000';
 var SELECT_OK_SW = '9000';
 var UNKNOWN_CMD_SW = '0000';
 var SELECT_APDU = buildSelectApdu(SAMPLE_LOYALTY_CARD_AID);
+var MYACCOUNT = "886986123101";
 
 function toPaddedHexString(i) {
     return ("00" + i.toString(16)).substr(-2);
@@ -35,7 +37,7 @@ var app = {
 
         app.okCommand = hce.util.hexStringToByteArray(SELECT_OK_SW);
         app.unknownCommand = hce.util.hexStringToByteArray(UNKNOWN_CMD_SW);
-        alert('onDeviceReady');
+        //alert('onDeviceReady');
     },
     // onCommand is called when an APDU command is received from the HCE reader
     // if the select apdu command is received, the loyalty card data is returned to the reader
@@ -45,25 +47,28 @@ var app = {
         var commandAsBytes = new Uint8Array(command);
         var commandAsString = hce.util.byteArrayToHexString(commandAsBytes);
 
-        alert(commandAsString);
+        //alert(commandAsString);
         console.log('received command ' + commandAsString);
         console.log('expecting        ' + SELECT_APDU);
 
         if (SELECT_APDU === commandAsString) {
         	
             //var accountNumberAsBytes = hce.util.stringToBytes(accountNumber.value);
-            var accountNumberAsBytes = hce.util.stringToBytes('test');
+            var accountNumberAsBytes = hce.util.stringToBytes(MYACCOUNT);
             var data = hce.util.concatenateBuffers(accountNumberAsBytes, app.okCommand);
 
             console.log('Sending ' + hce.util.byteArrayToHexString(data));
             hce.sendResponse(data);
             
-            alert('OK CMD SW');
+            //alert('OK CMD SW');
             console.log('OK CMD SW');
             //console.log('apdu=' + hce.util.byteArrayToHexString(app.okCommand));
             //hce.sendResponse(app.okCommand);
+        } else if (TRANSACTION_APDU == commandAsString){
+        	hce.sendResponse(hce.util.stringToBytes(SELECT_OK_SW));
+        	console.log('Transaction CMD SW');
         } else {
-            alert('UNKNOWN CMD SW');
+            //alert('UNKNOWN CMD SW');
             console.log('UNKNOWN CMD SW');
             hce.sendResponse(app.unknownCommand);
         }
