@@ -1,7 +1,32 @@
 /**********這個檔案裡是一些公用的函數**********/
 
+
+/**********設定主選單**********/
+	$(function() {
+		var s = "";
+		s += '<ul>';
+		s += '	<li class="current"><a href="index.html">Home</a></li>';
+		s += '	<li><a href="myBankCard.html">My Bank Card</a></li>';
+		s += '	<li><a href="myCreditCard.html">My Credit Card</a></li>';
+		s += '	<li><a href="myIdCard.html">My ID Card</a></li>';
+		s += '	<li>';
+		s += '		<a href="#">Settings</a>';
+		s += '		<ul>';
+		s += '			<li><a href="changePinCode.html">Change PIN Code</a></li>';
+		s += '			<li><a href="fingerprint.html">My Fingerprint</a></li>';
+		s += '		</ul>';
+		s += '	</li>';
+		s += '</ul>';
+		$('#nav').append(s);
+		
+	});
+
+
+
+
+
 /**********全域變數**********/
-var sServerBaseURL = "http://cms.gslssd.com/iovserver/";	//Server端接收 request 的 URL 路徑
+var sServerBaseURL = "http://cms.gslssd.com/myeidserver/";	//Server端接收 request 的 URL 路徑
 
 /**********取得 server API 的 base URL**********/
 function getServerBaseURL(){

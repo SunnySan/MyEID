@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>MyShield</title>
+		<title>My EID</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -21,10 +21,11 @@
 				<div id="header">
 
 					<!-- Logo -->
-						<h1><a href="index.html" id="logo">MyShield <em>by Taisys</em></a></h1>
+						<h1><a href="index.html" id="logo">My EID <em>by Taisys</em></a></h1>
 
 					<!-- Nav -->
 						<nav id="nav">
+							<!--
 							<ul>
 								<li class="current"><a href="index.html">Home</a></li>
 								<li><a href="myBankCard.html">My Bank Card</a></li>
@@ -38,6 +39,7 @@
 									</ul>
 								</li>
 							</ul>
+							-->
 						</nav>
 
 				</div>
@@ -45,9 +47,14 @@
 			<!-- Banner -->
 				<section id="banner">
 					<header>
-						<h2>MyShield: <em>Bank Service, Mobile Payment, Government Service and much more...</em></h2>
+						<h2>[MyCard]<em>Mobile Payment</em>
+							<br>[MyShield]<em>Bank Service</em>
+							<br>[MyEID]<em>Government Service and much more...</em>
+						</h2>
+						<!--
 						<a id="btnSignIn" href="signIn.html" class="button" style="display:none;">Sign In</a>
 						<a id="btnStartUse" href="#" class="button" onclick="startUse();" style="display:none;">Start</a>
+						-->
 					</header>
 				</section>
 
@@ -60,8 +67,8 @@
 								<a href="myPaymentService.html">
 									<div class="box highlight">
 										<i class="icon major fa-credit-card"></i>
-										<h3 style="font-size:1.6em;">Mobile Payment</h3>
-										<p style="font-size:1.2em;">Credit card payment through NFC POS terminal.</p>
+										<h3 style="font-size:1.6em;">MyCard</h3>
+										<p style="font-size:1.2em;">Mobile Payment: Credit card payment through NFC POS terminal.</p>
 									</div>
 								</a>
 							</section>
@@ -69,8 +76,8 @@
 								<a href="myBankService.html">
 									<div class="box highlight">
 										<i class="icon major fa-bank"></i>
-										<h3 style="font-size:1.6em;">Bank Service</h3>
-										<p style="font-size:1.2em;">Fund Transfer, Check Balance.</p>
+										<h3 style="font-size:1.6em;">MyShield</h3>
+										<p style="font-size:1.2em;">Bank Service: Fund Transfer, Check Balance.</p>
 									</div>
 								</a>
 							</section>
@@ -78,8 +85,8 @@
 								<a href="myGovernmentService.html">
 									<div class="box highlight">
 										<i class="icon major fa-file-text-o"></i>
-										<h3 style="font-size:1.6em;">Government Service</h3>
-										<p style="font-size:1.2em;">Document Signing.</p>
+										<h3 style="font-size:1.6em;">MyEID</h3>
+										<p style="font-size:1.2em;">Government Service: Document Signing.</p>
 									</div>
 								</a>
 							</section>
@@ -108,6 +115,7 @@
 <script>
 
 	$(function() {
+		/*
 		var sPhoneNumber = "";
 		sPhoneNumber = localStorage.getItem('myPhoneNumber');
 		if (beEmpty(sPhoneNumber)){
@@ -117,6 +125,7 @@
 			$('#btnSignIn').hide();
 			$('#btnStartUse').show();
 		}
+		*/
 	});
 </script>
 
