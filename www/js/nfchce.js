@@ -4,7 +4,8 @@ var TRANSACTION_APDU = 'aa000000';
 var SELECT_OK_SW = '9000';
 var UNKNOWN_CMD_SW = '0000';
 var SELECT_APDU = buildSelectApdu(SAMPLE_LOYALTY_CARD_AID);
-var MYACCOUNT = "886986123101";
+//var MYACCOUNT = "886986123101";
+var MYACCOUNT = $('#selectCardId').val();
 
 function toPaddedHexString(i) {
     return ("00" + i.toString(16)).substr(-2);

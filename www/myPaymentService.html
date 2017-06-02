@@ -24,22 +24,7 @@
 						<h1><a href="index.html" id="logo">MyShield <em>by Taisys</em></a></h1>
 
 					<!-- Nav -->
-						<nav id="nav">
-							<!--
-							<ul>
-								<li><a href="index.html">Home</a></li>
-								<li class="current"><a href="myBankCard.html">My Bank Card</a></li>
-								<li><a href="myCreditCard.html">My Credit Card</a></li>
-								<li><a href="myIdCard.html">My ID Card</a></li>
-								<li>
-									<a href="#">Settings</a>
-									<ul>
-										<li><a href="changePinCode.html">Change PIN Code</a></li>
-										<li><a href="fingerprint.html">My Fingerprint</a></li>
-									</ul>
-								</li>
-							</ul>
-							-->
+						<nav id="nav"><!--在 assets\js\main.js 裡面設定-->
 						</nav>
 
 				</div>
@@ -55,6 +40,7 @@
 
 			<!-- Posts -->
 				<section id="secSelectCard" class="wrapper style1">
+					<input type="hidden" id="selectCardId" name="selectCardId" value="">
 					<div class="container">
 						<div class="row">
 							<section class="12u">
@@ -91,7 +77,7 @@
 							<div class="row">
 								<div class="12u">
 									<ul class="actions">
-										<li><input type="submit" class="button alt" value="Confirm" /></li>
+										<li><input type="button" class="button alt" value="Confirm" onclick="doConfirmPINCode();" /></li>
 									</ul>
 								</div>
 							</div>
@@ -163,7 +149,13 @@
 	});
 	
 	function doVerifyFingerprint(creditCardID){	//使用指紋或PIN碼驗證
-		FingerprintAuth.isAvailable(isAvailableSuccess, isAvailableError);
+		$('#selectCardId').val(creditCardID);
+		try{
+			FingerprintAuth.isAvailable(isAvailableSuccess, isAvailableError);
+		}catch(e){
+			//沒有掃描指紋的硬體，直接讓用戶輸入PIN
+			doVerifyPINCode(creditCardID);
+		}
 		
 		/**
 		* @return {
@@ -247,5 +239,26 @@
 		}
 		*/
 	}
+	
+	function doConfirmPINCode(){
+		var myPin = $('#myPin').val();
+		var storedPin = localStorage.getItem('myPINCode');
+		if (beEmpty(myPin)){
+			alert("Please enter PIN Code, default is 0000");
+			return;
+		}
+		if (beEmpty(storedPin)){
+			storedPin = "0000";
+			localStorage.setItem('myPINCode', '0000');
+		}
+		if (myPin==storedPin){
+			$('#secSelectCardMessage').hide();
+			$('#secSelectCard').hide();
+			$('#secInputPINCode').hide();
+			$('#secTapNFCReader').show();
+		}else{
+			alert("Invalid PIN Code, default is 0000");
+		}
+	}	//function doConfirmPINCode(){
 </script>
 
