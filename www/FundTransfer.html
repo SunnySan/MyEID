@@ -147,7 +147,11 @@
 				return;
 			}else{
 				if (data.resultCode=="00000"){
-					alert("Transfer funds successfully!");
+					if (notEmpty(data.message)){
+						alert(data.message);
+					}else{
+						alert("Transfer funds successfully!");
+					}
 				}else{
 					alert("Failed to transfer funds:<br>" + data.resultText);
 				}
