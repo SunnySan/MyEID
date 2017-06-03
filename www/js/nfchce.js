@@ -4,8 +4,8 @@ var TRANSACTION_APDU = 'aa000000';
 var SELECT_OK_SW = '9000';
 var UNKNOWN_CMD_SW = '0000';
 var SELECT_APDU = buildSelectApdu(SAMPLE_LOYALTY_CARD_AID);
-//var MYACCOUNT = "886986123101";
-var MYACCOUNT = $('#selectCardId').val();
+var MYACCOUNT = "886986123101";
+//var MYACCOUNT = $('#selectCardId').val();
 
 function toPaddedHexString(i) {
     return ("00" + i.toString(16)).substr(-2);
@@ -53,9 +53,9 @@ var app = {
         console.log('expecting        ' + SELECT_APDU);
 
         //var accountNumberAsBytes = hce.util.stringToBytes(accountNumber.value);
+        MYACCOUNT = $('#selectCardId').val();
         var accountNumberAsBytes = hce.util.stringToBytes(MYACCOUNT);
         var data = hce.util.concatenateBuffers(accountNumberAsBytes, app.okCommand);
-        alert(MYACCOUNT);
 
         if (SELECT_APDU === commandAsString) {
 
