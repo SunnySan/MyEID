@@ -55,7 +55,7 @@ var app = {
         //var accountNumberAsBytes = hce.util.stringToBytes(accountNumber.value);
         var accountNumberAsBytes = hce.util.stringToBytes(MYACCOUNT);
         var data = hce.util.concatenateBuffers(accountNumberAsBytes, app.okCommand);
-        alert(data);
+        alert(MYACCOUNT);
 
         if (SELECT_APDU === commandAsString) {
 
