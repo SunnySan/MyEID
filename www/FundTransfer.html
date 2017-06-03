@@ -125,9 +125,9 @@
 			storedPin = "0000";
 			localStorage.setItem('myPINCode', '0000');
 		}
-		alert('myPin=' + myPin);
-		alert('storedPin=' + storedPin);
-		if (!myPin==storedPin){
+		//alert('myPin=' + myPin);
+		//alert('storedPin=' + storedPin);
+		if (myPin!=storedPin){
 			alert("Invalid PIN Code, default is 0000");
 			return;
 		}
