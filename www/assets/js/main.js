@@ -21,14 +21,14 @@
 		var s = "";
 		s += '<ul>';
 		s += '	<li class="current"><a href="index.html">Home</a></li>';
-		s += '	<li><a href="myBankCard.html">My Bank Card</a></li>';
-		s += '	<li><a href="myCreditCard.html">My Credit Card</a></li>';
-		s += '	<li><a href="myIdCard.html">My ID Card</a></li>';
+		s += '	<li><a href="myPaymentService.html">MyCard</a></li>';
+		s += '	<li><a href="myBankService.html">MyShield</a></li>';
+		s += '	<li><a href="myGovernmentService.html">MyEID</a></li>';
 		s += '	<li>';
 		s += '		<a href="#">Settings</a>';
 		s += '		<ul>';
 		s += '			<li><a href="changePinCode.html">Change PIN Code</a></li>';
-		s += '			<li><a href="fingerprint.html">My Fingerprint</a></li>';
+		//s += '			<li><a href="fingerprint.html">My Fingerprint</a></li>';
 		s += '		</ul>';
 		s += '	</li>';
 		s += '</ul>';

@@ -1,7 +1,7 @@
 /**********這個檔案裡是一些公用的函數**********/
 
 /**********全域變數**********/
-var sServerBaseURL = "http://cms.gslssd.com/myeidserver/";	//Server端接收 request 的 URL 路徑
+var sServerBaseURL = "http://cms.gslssd.com/MyEIDServer/";	//Server端接收 request 的 URL 路徑
 
 /**********取得 server API 的 base URL**********/
 function getServerBaseURL(){
@@ -167,6 +167,8 @@ function setLocalValue(key, value){
 
 /**********顯示類似alert的message box**********/
 function MsgBox(msg, callbackClose){
+	alert(msg);
+	return;
 	if (callbackClose==null){
 		$(document).simpledialog2({ blankContent : "<p class='msgbox-text'>" + msg + "</p>" + "<a rel='close' data-role='button' href='#' class='msgbox-button'>Close</a>", headerText: 'Notification', mode: 'blank', showModal: true, headerClose: true, animate: false, themeDialog: 'f'});
 	}else{
@@ -209,7 +211,7 @@ function getDataFromServer(sProgram, sData, sResponseType, SuccessCallback, bBlo
 			alert(status);
 			alert(error);
 			alert(xhr.responseText);
-  			MsgBox('System error, please try again later.');
+  			alert('System error, please try again later.');
 		},
 		success: function (data){ //ajax請求成功後do something with response data
 			SuccessCallback(data);
