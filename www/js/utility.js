@@ -18,7 +18,6 @@ function deleteFingerprintKey(){
 	
 	function successCallback(result) {
 		console.log("Successfully deleted cipher: " + JSON.stringify(result));
-		alert("Successfully deleted cipher");
 	}
 	
 	function errorCallback(error) {
