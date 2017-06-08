@@ -196,6 +196,7 @@
 							//alert("FingerprintAuth Dialog Cancelled!");
 						} else {
 							alert("FingerprintAuth Error: " + error);
+							deleteFingerprintKey();
 						}
 						doVerifyPINCode(creditCardID);
 					}

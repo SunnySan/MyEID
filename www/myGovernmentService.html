@@ -143,10 +143,9 @@
 			if (result.isAvailable) {
 				//alert("result.isAvailable");
 				var encryptConfig = {
-					clientId: "MyEID",
-					username: "886986123101",
-					password: "0000",
-					disableBackup: true
+					clientId: fingerprintClientID,
+					username: fingerprintUserName,
+					password: fingerprintPassword,
 					}; // See config object for required parameters 
 
 					FingerprintAuth.encrypt(encryptConfig, successCallback, errorCallback);
