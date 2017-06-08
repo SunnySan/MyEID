@@ -3,6 +3,10 @@
 /**********全域變數**********/
 var sServerBaseURL = "http://cms.gslssd.com/MyEIDServer/";	//Server端接收 request 的 URL 路徑
 
+var fingerprintClientID = "MyEID1";
+var fingerprintUserName = "886986123101";
+var fingerprintPassword = "0000";
+
 /**********取得 server API 的 base URL**********/
 function getServerBaseURL(){
 	return sServerBaseURL;
