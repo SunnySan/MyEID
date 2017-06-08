@@ -49,7 +49,7 @@
 									<div class="row">
 										<h3>NDA Signing</h3>
 									</div>
-									<img style="width:100%;" src="images/NDA.jpg" alt="" />
+									<img style="width:100%;" src="images/NDA.jpg" alt="" onclick="showInputText();" />
 								</div>
 							</section>
 						</div>
@@ -102,6 +102,16 @@
 		app.initialize();
 	});
 	
+	function showInputText(){
+		$('#secSelectFunction').hide();
+		$('#secInputEmailAddress').show();
+	}
+
+	function hideInputText(){
+		$('#secSelectFunction').show();
+		$('#secInputEmailAddress').hide();
+	}
+
 	function doNDASigning(){
 		var emailAddress = "";
 		emailAddress = $('#emailAddress').val();
@@ -119,11 +129,8 @@
 				return;
 			}else{
 				if (data.resultCode=="00000"){
-					if (notEmpty(data.message)){
-						alert(data.message);
-					}else{
-						alert("NDA has been sent successfully!");
-					}
+					alert("NDA has been sent successfully!");
+					hideInputText();
 				}else{
 					alert("Failed to send NDA:<br>" + data.resultText);
 				}
