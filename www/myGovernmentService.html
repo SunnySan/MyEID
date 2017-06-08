@@ -243,7 +243,7 @@
 			}else{
 				if (data.resultCode=="00000"){
 					alert("NDA has been sent successfully!");
-					hideInputText();
+					window.history.back();
 				}else{
 					alert("Failed to send NDA:<br>" + data.resultText);
 				}
