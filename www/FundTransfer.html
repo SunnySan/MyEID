@@ -62,8 +62,22 @@
 									<input type="text" name="comment" id="comment" maxlength="20" />
 								</div>
 							</div>
-							<div class="row"><span>&nbsp;</span></div>
-							<h3>PIN Code</h3>
+							<div class="row">
+								<div class="12u">
+									<ul class="actions">
+										<li><input type="button" class="button alt" value="Confirm" onclick="doConfirm();" /></li>
+									</ul>
+								</div>
+							</div>
+						</form>
+					</div>
+				</section>
+
+			<!-- Posts -->
+				<section id="secInputPINCode" class="wrapper style1" style="display:none;">
+					<div class="container">
+						<h3>Please enter PIN Code</h3>
+						<form>
 							<div class="row">
 								<div class="12u">
 									<input type="password" name="myPin" id="myPin" />
@@ -72,7 +86,7 @@
 							<div class="row">
 								<div class="12u">
 									<ul class="actions">
-										<li><input type="button" class="button alt" value="Confirm" onclick="doConfirm();" /></li>
+										<li><input type="button" class="button alt" value="Confirm" onclick="doConfirmPINCode();" /></li>
 									</ul>
 								</div>
 							</div>
@@ -97,25 +111,100 @@
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/utility.js"></script>
 <script type="text/javascript" src="js/jquery.blockUI.js"></script><!--JQuery BlockUI，請參考http://www.malsup.com/jquery/block/ -->
-<script type="text/javascript" src="js/nfchce.js"></script><!--用NFC讀卡機讀取手機模擬的HCE卡片-->
 
 <script>
 
 	$(function() {
 		app.initialize();
 	});
-	
+
 	function doConfirm(){
 		var toAccount = $('#toAccount').val();
 		var amount = $('#amount').val();
 		var comment = $('#comment').val();
-		var myPin = $('#myPin').val();
 
 		if (beEmpty(toAccount) || beEmpty(amount)){
 			alert("Please enter Beneficiary Account and Amount!");
 			return;
 		}
 		
+		var sMessage = "Confirm to transfer " + amount + " to " + toAccount;
+		if (!confirm(sMessage)) return;
+		
+	}	//function doConfirmPINCode(){
+
+	function doVerifyFingerprint(){	//使用指紋或PIN碼驗證
+		try{
+			FingerprintAuth.isAvailable(isAvailableSuccess, isAvailableError);
+		}catch(e){
+			//沒有掃描指紋的硬體，直接讓用戶輸入PIN
+			doVerifyPINCode();
+		}
+		
+		/**
+		* @return {
+		*      isAvailable:boolean,
+		*      isHardwareDetected:boolean,
+		*      hasEnrolledFingerprints:boolean
+		*   }
+		*/
+		function isAvailableSuccess(result) {
+			//alert("FingerprintAuth available: " + JSON.stringify(result));
+			if (result.isAvailable) {
+				//alert("result.isAvailable");
+				var encryptConfig = {
+					clientId: "MyEID",
+					username: "886986123101",
+					password: "0000",
+					disableBackup: true
+					}; // See config object for required parameters 
+
+					FingerprintAuth.encrypt(encryptConfig, successCallback, errorCallback);
+					
+					function successCallback(result) {
+						//alert("successCallback(): " + JSON.stringify(result));
+						if (result.withFingerprint) {
+							//console.log("Successfully encrypted credentials.");
+							//console.log("Encrypted credentials: " + result.token);
+							doTransaction();
+						} else if (result.withBackup) {
+							console.log("Authenticated with backup password");
+							doVerifyPINCode();
+						}
+					}
+					
+					function errorCallback(error) {
+						if (error === FingerprintAuth.ERRORS.FINGERPRINT_CANCELLED) {
+							//alert("FingerprintAuth Dialog Cancelled!");
+						} else {
+							alert("FingerprintAuth Error: " + error);
+						}
+						doVerifyPINCode();
+					}
+			}else if (!result.isHardwareDetected){
+				//沒有掃描指紋的硬體，直接讓用戶輸入PIN
+				doVerifyPINCode();
+			}else{	//有硬體，但尚未設定指紋
+				//alert("Please enroll your fingerprint first!");
+				doVerifyPINCode();
+			}
+		}	//function isAvailableSuccess(result) {
+ 
+ 
+		function isAvailableError(message) {
+			alert("isAvailableError(): " + message);
+			doVerifyPINCode();
+		}	//function isAvailableError(message) {
+	}	//function doVerifyFingerprint(var creditCardID){	//使用指紋或PIN碼驗證
+
+	function doVerifyPINCode(){
+		$('#secSelectCardMessage').hide();
+		$('#secInput').hide();
+		$('#secInputPINCode').show();
+	}
+
+	function doConfirmPINCode(){
+		var myPin = $('#myPin').val();
 		var storedPin = localStorage.getItem('myPINCode');
 		if (beEmpty(myPin)){
 			alert("Please enter PIN Code, default is 0000");
@@ -125,16 +214,14 @@
 			storedPin = "0000";
 			localStorage.setItem('myPINCode', '0000');
 		}
-		//alert('myPin=' + myPin);
-		//alert('storedPin=' + storedPin);
-		if (myPin!=storedPin){
+		if (myPin==storedPin){
+			doTransaction();
+		}else{
 			alert("Invalid PIN Code, default is 0000");
-			return;
 		}
-		
-		var sMessage = "Confirm to transfer " + amount + " to " + toAccount;
-		if (!confirm(sMessage)) return;
-		
+	}	//function doConfirmPINCode(){
+	
+	function doTransaction(){
 		var sData = "";
 		sData += "toAccount=" + toAccount;
 		sData += "&amount=" + amount;
@@ -158,7 +245,6 @@
 			}
 
 		});	//getDataFromServer("xxx.jsp", sData, "json", function(data){
-		
-	}	//function doConfirmPINCode(){
+	}	//function doTransaction(){
 </script>
 
