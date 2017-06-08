@@ -131,6 +131,8 @@
 		var sMessage = "Confirm to transfer " + amount + " to " + toAccount;
 		if (!confirm(sMessage)) return;
 		
+		doVerifyFingerprint();
+		
 	}	//function doConfirmPINCode(){
 
 	function doVerifyFingerprint(){	//使用指紋或PIN碼驗證
