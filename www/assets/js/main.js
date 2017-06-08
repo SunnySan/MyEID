@@ -24,6 +24,7 @@
 		s += '	<li><a href="myPaymentService.html">MyCard</a></li>';
 		s += '	<li><a href="myBankService.html">MyShield</a></li>';
 		s += '	<li><a href="myGovernmentService.html">MyEID</a></li>';
+		s += '	<li><a href="TransactionReport.html">Transaction Report</a></li>';
 		s += '	<li>';
 		s += '		<a href="#">Settings</a>';
 		s += '		<ul>';
