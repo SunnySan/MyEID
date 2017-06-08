@@ -108,13 +108,14 @@
 		var sData = "";
 		var s = "";
 		var tmp = "";
-
+alert("0");
 		getDataFromServer("ajaxGetTransactionReport.jsp", sData, "json", function(data){
 			if (!data.resultCode || !data.resultText){
 				msgBox("Unable to get Transaction Report.");
 				return;
 			}else{
 				if (data.resultCode=="00000"){
+alert("1");
 					s = "";
 					$.each( data.records, function(i, r) {
 						tmp = "";

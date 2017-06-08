@@ -25,6 +25,8 @@
 		s += '	<li><a href="myBankService.html">MyShield</a></li>';
 		s += '	<li><a href="myGovernmentService.html">MyEID</a></li>';
 		s += '	<li><a href="TransactionReport.html">Transaction Report</a></li>';
+		s += '	<li><a href="changePinCode.html">Change PIN Code</a></li>';
+		/*
 		s += '	<li>';
 		s += '		<a href="#">Settings</a>';
 		s += '		<ul>';
@@ -32,6 +34,7 @@
 		//s += '			<li><a href="fingerprint.html">My Fingerprint</a></li>';
 		s += '		</ul>';
 		s += '	</li>';
+		*/
 		s += '</ul>';
 		$('#nav').append(s);
 		
