@@ -224,6 +224,10 @@
 	}	//function doConfirmPINCode(){
 	
 	function doTransaction(){
+		var toAccount = $('#toAccount').val();
+		var amount = $('#amount').val();
+		var comment = $('#comment').val();
+
 		var sData = "";
 		sData += "toAccount=" + toAccount;
 		sData += "&amount=" + amount;
