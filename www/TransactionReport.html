@@ -18,6 +18,12 @@
 	    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="css/footable.core.min.css" type="text/css" /><!--處理table的RWD/sorting/filtering，參考網頁：https://github.com/bradvin/FooTable -->
 		<link rel="stylesheet" href="css/footable.standalone.min.css" type="text/css" /><!--處理table的RWD/sorting/filtering，參考網頁：https://github.com/bradvin/FooTable -->
+
+		<style>
+			.myWrap{
+				word-wrap: break-word;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="page-wrapper">
@@ -129,7 +135,7 @@
 						s = "<tr>";
 						s += "<td>" + r.Update_Date + "</td>";
 						s += "<td>" + r.Transaction_Type + "</td>";
-						s += "<td>" + r.To_Account + "</td>";
+						s += "<td class='myWrap'>" + r.To_Account + "</td>";
 						s += "<td class='myMoney'>" + toCurrency(r.Amount) + "</td>";
 						if (r.Transaction_Type=="MyCard"){
 							tmp = "&nbsp;";
@@ -144,7 +150,7 @@
 							if (r.Comment=="creditcard01") tmp = "VISA Card";
 							if (r.Comment=="creditcard02") tmp = "Master Card";
 						}
-						s += "<td>" + tmp + "</td>";
+						s += "<td class='myWrap'>" + tmp + "</td>";
 						s += "</tr>";
 						$('#tblResult tbody').append(s);
 					});	//$.each( data.orders, function(i, r) {
