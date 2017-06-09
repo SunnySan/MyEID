@@ -50,7 +50,7 @@
 					<div class="container">
 						<h3>Transaction Report</h3>
 
-						<table id="tblResult" class="with-border footable" data-page-size="50" data-limit-navigation="5" style="text-shadow:none;">
+						<table id="tblResult" class="with-border footable" data-page-size="50" data-limit-navigation="5" style="text-shadow:none;width:90%;">
 							<thead>
 								<tr>
 									<th data-class="expand">Date</th>
@@ -99,17 +99,13 @@
 <script>
 
 	$(function() {
-		alert("10");
 		//app.initialize();
 		document.addEventListener("deviceready", generateReport, false);
 	});
 	
 	function generateReport(){
-		alert("11");
 		$('#tblResult').footable();
-		alert("12");
 		getTransactionReport();
-		alert("13");
 	}
 	
 </script>
@@ -120,14 +116,13 @@
 		var sData = "";
 		var s = "";
 		var tmp = "";
-alert("0");
+
 		getDataFromServer("ajaxGetTransactionReport.jsp", sData, "json", function(data){
 			if (!data.resultCode || !data.resultText){
 				msgBox("Unable to get Transaction Report.");
 				return;
 			}else{
 				if (data.resultCode=="00000"){
-alert("1");
 					s = "";
 					$.each( data.records, function(i, r) {
 						tmp = "";
