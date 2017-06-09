@@ -99,13 +99,18 @@
 <script>
 
 	$(function() {
-		alert("11");
+		alert("10");
 		app.initialize();
+		document.addEventListener("deviceready", generateReport, false);
+	});
+	
+	function generateReport(){
+		alert("11");
 		$('#tblResult').footable();
 		alert("12");
 		getTransactionReport();
 		alert("13");
-	});
+	}
 	
 </script>
 
