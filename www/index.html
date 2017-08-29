@@ -273,14 +273,14 @@
 
 		getDataFromServer("ajaxDoMobileEIDSingature.jsp", sData, "json", function(data){
 			if (!data.resultCode || !data.resultText){
-				alert("Unable to send NDA.");
+				alert("Unable to send file.");
 				return;
 			}else{
 				if (data.resultCode=="00000"){
-					alert("NDA has been sent successfully!");
+					alert("File has been sent successfully!");
 					window.history.back();
 				}else{
-					alert("Failed to send NDA:<br>" + data.resultText);
+					alert("Failed to send file:<br>" + data.resultText);
 				}
 			}
 
